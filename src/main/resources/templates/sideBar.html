@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar" th:fragment="sideBar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " th:href="@{index}">
+        <i class="bi bi-grid"></i>
+        <span th:text="${nombre}">Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+    <!--<li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>Proveedores</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" th:each="proveedores: ${proveedores}">
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span th:text="${proveedores.getNombre()}">Alerts</span>
+          </a>
+        </li>
+      </ul>
+    </li> -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-journal-text"></i><span>Formularios</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li class="nav-heading">Introducción</li> <!-- Introducción -->
+        <li>
+          <a th:href="@{introducir-producto}">
+            <i class="bi bi-circle"></i><span>Introducir producto</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/introducirProveedor}">
+            <i class="bi bi-circle"></i><span>Introducir proveedor</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/introducirCategoria}">
+            <i class="bi bi-circle"></i><span>Introducir categoria</span>
+          </a>
+        </li>
+
+        <li>
+          <a th:href="@{/listaProductoIntroducirCodigo}">
+            <i class="bi bi-circle"></i><span>Introducir codigo de trazabilidad</span>
+          </a>
+        </li>
+
+        <li class="nav-heading">Escanear</li> <!-- Escaner -->
+
+        <li>
+          <a th:href="@{escanerProducto}">
+            <i class="bi bi-circle"></i><span>Escanear producto</span>
+          </a>
+        </li>
+
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li class="nav-heading">Listas</li> <!-- Listas -->
+
+    <li class="nav-item"> <!-- Todos los proveedores -->
+      <a class="nav-link collapsed" th:href="@{proveedores}">
+        <i class="ri-caravan-fill"></i>
+        <span>Todos los proveedores</span>
+      </a>
+    </li>
+
+    <li class="nav-item"> <!-- Todos los productos -->
+      <a class="nav-link collapsed" th:href="@{productos}">
+        <i class="ri-product-hunt-fill"></i>
+        <span>Todos los productos</span>
+      </a>
+    </li>
+
+    <li class="nav-item"> <!-- Categoriass -->
+      <a class="nav-link collapsed" th:href="@{/categorias}">
+        <i class="ri-bookmark-fill"></i>
+        <span>Categorias</span>
+      </a>
+    </li>
+
+    <li class="nav-item"> <!-- Comparativa de precios -->
+      <a class="nav-link collapsed" th:href="@{/graficoPrecios}">
+        <i class="ri-money-euro-box-fill"></i>
+        <span>Comparativa de precios</span>
+      </a>
+    </li>
+
+    <li class="nav-heading">Mis listas</li> <!-- Mis listas -->
+
+    <li class="nav-item"> <!-- Mis proveedores -->
+      <a class="nav-link collapsed" th:href="@{/misProveedores}">
+        <i class="ri-caravan-fill"></i>
+        <span>Mis proveedores</span>
+      </a>
+    </li>
+
+    <li class="nav-item"> <!-- Codigos de trazabilidad -->
+      <a class="nav-link collapsed" th:href="@{/listaCodigosProducto}">
+        <i class="ri-article-line"></i>
+        <span>Mis codigos de trazabilidad</span>
+      </a>
+    </li>
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.entity.Mesas" table="mesas" schema="gestionbar">
+        <id name="id" column="id"/>
+        <property name="ocupada" column="ocupada"/>
+        <property name="fkBar" column="fk_bar" insert="false" update="false"/>
+        <many-to-one name="barByFkBar" class="com.entity.Bar">
+            <column name="fk_bar"/>
+        </many-to-one>
+        <set name="reservasById" inverse="true">
+            <key>
+                <column name="fk_mesa"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.entity.Reservas"/>
+        </set>
+    </class>
+</hibernate-mapping>

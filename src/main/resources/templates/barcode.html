@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Barcode scanner Javascript</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'><link rel="stylesheet" href="/css/barcode.css">
+
+</head>
+<body>
+	<div th:fragment="barcode">
+		<!-- partial:index.partial.html -->
+		<input id="scanner_input" class="form-control" type="text" />
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#barcodeScanner">
+			Escanear producto
+		</button>
+		<button type="button" id="clear-page" class="btn btn-warning">
+			borrar
+		</button>
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="barcodeScanner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Scan barcode</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="interactive" class="viewport">
+							<video style="width: 100%;" autoplay="true" preload="auto" src="" muted="true" playsinline="true"></video>
+						</div>
+						<div class="error"></div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-secondary" id="boton" data-dismiss="modal" value="Cerrar"></input>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<ul id="result_strip"></ul>
+		</div>
+		<!-- partial -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js'></script>
+		<script src='https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.js'></script><script  src="/js/script.js"></script>
+
+	</div>
+</body>
+</html>

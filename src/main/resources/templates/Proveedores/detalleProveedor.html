@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="/head::head"/>
+
+<body>
+
+<th:block th:insert="/header::header"/>
+
+<th:block th:insert="/sideBar::sideBar"/>
+
+<main id="main" class="main">
+
+    <th:block th:insert="pageTitle::pageTitle"/>
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <h2 th:text="${name}">Proveedor</h2>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Información del proveedor</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar información</button>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content pt-2">
+
+                            <!-- Informacion producto -->
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <h5 class="card-title">Nombre</h5>
+                                <div class="col-lg-9 col-md-8" th:text="${name}">nombre</div>
+
+                                <h5 class="card-title">Detalles</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label " style="color: rgba(1, 41, 112, 0.6); margin-bottom: 20px;">Num. Telefono</div>
+                                    <div class="col-lg-9 col-md-8" th:text="${num}">numero</div>
+                                </div>
+
+                            </div>
+
+                            <!-- Formulario edicion producto -->
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <th:block th:insert="Proveedores/formularioProveedor::formularioProveedor"/>
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <section class="section dashboard">
+                <div class="row">
+
+                    <p id="idProveedor" th:text="${idProveedor}" style="display: none;"></p>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Productos</h5>
+
+                        <!-- Default Tabs -->
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                        type="button" role="tab" aria-controls="home" aria-selected="true">Productos del proveedor
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                        type="button" role="tab" aria-controls="profile" aria-selected="false">Todos los productos
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2" id="myTabContent">
+
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="card-body pb-0">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col" th:text="${tipo}">Tabla</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Eliminar de proveedor</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="datos1: ${datos1}">
+                                            <th scope="row"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos1.img}" referrerpolicy="no-referrer" alt=""></a></th>
+                                            <td><a th:href="@{'/detalleProductos?id='+${datos1.id}}" class="text-primary fw-bold" th:text="${datos1.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                                            <td class="fw-bold" th:text="${datos1.fkCategoria}">124</td>
+                                            <td class="fw-bold"><input type="number" step="any" th:id="'eliminarPrecio'+${datos1.id}" th:value="${datos1.precio}" class="form-control" /></td>
+                                            <td class="fw-bold">€</td>
+                                            <td class="fw-bold"><input th:onclick="'anadirProducto('+${datos1.id}+','+${idProveedor}+',3)'" type="button" style="background:#00c900; border-color: #00c900;" class="btn btn-primary" value="Editar precio"></td>
+                                            <td class="fw-bold"><input th:onclick="'anadirProducto('+${datos1.id}+','+${idProveedor}+',2)'" type="button" class="btn btn-primary" value="Eliminar"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="card-body pb-0">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col" th:text="${tipo}">Tabla</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">precio</th>
+                                            <th scope="col">Añadir proveedor</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="datos2: ${datos2}">
+                                            <th scope="row"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos2.img}" referrerpolicy="no-referrer" alt=""></a></th>
+                                            <td><a th:href="@{'/detalleProductos?id='+${datos2.id}}" class="text-primary fw-bold" th:text="${datos2.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                                            <td class="fw-bold" th:text="${datos2.fkCategoria}">124</td>
+                                            <td class="fw-bold"><input type="number" step="any" th:id="'introducirPrecio'+${datos2.id}" class="form-control" th:name="precio"></td>
+                                            <td class="fw-bold"><input type="button" th:onclick="'anadirProducto('+${datos2.id}+','+${idProveedor}+',1)'" class="btn btn-primary" value="Añadir"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div><!-- End Default Tabs -->
+
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<th:block th:insert="/footer::footer"/>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:insert="scripts::scripts"/>
+
+</body>
+
+</html>

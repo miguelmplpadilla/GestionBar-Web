@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="/head::head"/>
+
+<body>
+
+<th:block th:insert="/header::header"/>
+
+<th:block th:insert="/sideBar::sideBar"/>
+
+<main id="main" class="main">
+
+    <th:block th:insert="pageTitle::pageTitle"/>
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img th:src="${img}" style="width: 460px; height: 460px;" alt="Profile" class="rounded-circle">
+                        <h2 th:text="${nombre}">Producto</h2>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Vista perfil</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar perfil</button>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content pt-2">
+
+                            <!-- Informacion producto -->
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <h5 class="card-title">Nombre usuario</h5>
+                                <div class="col-lg-9 col-md-8" th:text="${nombre}">nombre</div>
+
+                                <h5 class="card-title">Detalles</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label " style="color: rgba(1, 41, 112, 0.6); margin-bottom: 20px;">Correo electronico</div>
+                                    <div class="col-lg-9 col-md-8" th:text="${correo}">correo</div>
+                                </div>
+
+                            </div>
+
+                            <!-- Formulario edicion producto -->
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <div class="card">
+
+                                    <div class="card-body">
+
+                                        <!-- General Form Elements -->
+                                        <form>
+
+                                            <div class="row mb-3">
+                                                <label for="inputPassword" class="col-sm-2 col-form-label">Imagen</label>
+                                                <div class="col-sm-10">
+                                                    <textarea readonly type="text" class="form-control" th:name="img" id="imagen" th:text="${fotoPerfil}"/>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <img id="img" referrerpolicy="no-referrer" th:src="${fotoPerfil}" style="margin: 5px;" width="320" height="240">
+                                                <video id="video" style="display: none; margin: 5px;" width="320" height="240" autoplay></video>
+                                            </div>
+                                            <input style="margin: 5px;" class="btn btn-primary" type="button" id="start-camera" value="Start camara">
+                                            <input style="margin: 5px;" class="btn btn-primary" type="button" id="click-photo" value="Hacer foto">
+                                            <canvas id="canvas" width="320" height="240"></canvas>
+
+                                            <div class="row mb-3">
+                                                <label for="inputText" class="col-sm-2 col-form-label">Correo electronico</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" th:name="correo" th:value="${correo}">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label"></label>
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-primary">Actualizar datos</button>
+                                                </div>
+                                            </div>
+
+                                        </form><!-- End General Form Elements -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<th:block th:insert="/footer::footer"/>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:insert="scripts::scripts"/>
+
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="/head::head"/>
+
+<body>
+
+<th:block th:insert="/header::header"/>
+
+<th:block th:insert="/sideBar::sideBar"/>
+
+<main id="main" class="main">
+
+    <th:block th:insert="pageTitle::pageTitle"/>
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="card-body">
+                <h5 class="card-title">Mis proveedores</h5>
+
+                <!-- Default Tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                type="button" role="tab" aria-controls="home" aria-selected="true">Mis proveedores
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                type="button" role="tab" aria-controls="profile" aria-selected="false">Todos los proveedores
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content pt-2" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="card top-selling">
+
+                            <div class="card-body pb-0">
+                                <h5 class="card-title" th:text="${tipo}">Tabla</h5>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" th:text="${tipo}">Tabla</th>
+                                        <th scope="col">Num. Telefono</th>
+                                        <th scope="col">Favorito</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="proveedor: ${proveedor}">
+                                        <!--th:href="@{'/detalleProductos?id='+${datos.id}}"-->
+                                        <td><a th:href="@{'/detalleProveedor?id='+${proveedor.id}}" class="text-primary fw-bold" th:text="${proveedor.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                                        <td class="fw-bold" th:text="${proveedor.numeroTelefono}">proveedor</td>
+                                        <td class="fw-bold"><a th:href="@{'/misProveedores?accion=false&id='+${proveedor.id}}"><input type="button" class="btn btn-primary" value="Eliminar de favoritos"></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="card top-selling">
+
+                            <div class="card-body pb-0">
+                                <h5 class="card-title" th:text="${tipo}">Tabla</h5>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" th:text="${tipo}">Tabla</th>
+                                        <th scope="col">Num. Telefono</th>
+                                        <th scope="col">Favorito</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="datos: ${datos}">
+                                        <!--th:href="@{'/detalleProductos?id='+${datos.id}}"-->
+                                        <td><a th:href="@{'/detalleProveedor?accion=true&id='+${datos.id}}" class="text-primary fw-bold" th:text="${datos.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                                        <td class="fw-bold" th:text="${datos.numeroTelefono}">proveedor</td>
+                                        <td class="fw-bold"><a th:href="@{'/misProveedores?accion=true&id='+${datos.id}}"><input type="button" class="btn btn-primary" value="Añadir a favoritos"></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!-- End Default Tabs -->
+
+            </div>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<th:block th:insert="/footer::footer"/>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:insert="scripts::scripts"/>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.entity.Reservas" table="reservas" schema="gestionbar">
+        <id name="id" column="id"/>
+        <property name="nombreCliente" column="nombreCliente"/>
+        <property name="numeroTelefono" column="numeroTelefono"/>
+        <property name="cantidadComensales" column="cantidadComensales"/>
+        <property name="fecha" column="fecha"/>
+        <property name="hora" column="hora"/>
+        <property name="comentarios" column="comentarios"/>
+        <property name="fkMesa" column="fk_mesa"/>
+        <many-to-one name="mesasByFkMesa" class="com.entity.Mesas">
+            <column name="fk_mesa"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

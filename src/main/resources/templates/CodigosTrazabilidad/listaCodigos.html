@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="/head::head"/>
+
+<body>
+
+<th:block th:insert="/header::header"/>
+
+<th:block th:insert="/sideBar::sideBar"/>
+
+<main id="main" class="main">
+
+    <th:block th:insert="pageTitle::pageTitle"/>
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="card" style="padding: 10px;">
+                <h5 class="card-title">Lista de mis codigos</h5>
+
+                <div class="accordion" id="accordionExample" th:each="datos: ${datos}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" th:id="'heading'+${datos.id}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="'#collapse'+${datos.id}" aria-expanded="true"
+                                    th:aria-controls="'collapse'+${datos.id}">
+                                <p th:text="${datos.nombreProducto}"></p>
+                            </button>
+                        </h2>
+                        <div th:id="'collapse'+${datos.id}" class="accordion-collapse collapse"
+                             th:aria-labelledby="'heading'+${datos.id}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Codigo</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="codigos, codStat: ${datos.codigoTrazabilidad}">
+                                        <th scope="row" th:text="${codStat.count}"></th>
+                                        <th scope="row" style="font-weight:normal;" th:text="${codigos}"></th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+    </section>
+
+</main><!-- End #main -->
+
+<th:block th:insert="/footer::footer"/>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:insert="scripts::scripts"/>
+</body>
+
+</html>

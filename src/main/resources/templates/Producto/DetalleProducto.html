@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="/head::head"/>
+
+<body>
+
+<th:block th:insert="/header::header"/>
+
+<th:block th:insert="/sideBar::sideBar"/>
+
+<main id="main" class="main">
+
+    <th:block th:insert="pageTitle::pageTitle"/>
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img th:src="${img}" style="width: 460px; height: 460px;" alt="Profile" class="rounded-circle">
+                        <h2 th:text="${name}">Producto</h2>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Vista de producto</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar informacion</button>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content pt-2">
+
+                            <!-- Informacion producto -->
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <h5 class="card-title">Nombre</h5>
+                                <div class="col-lg-9 col-md-8" th:text="${name}">nombre</div>
+
+                                <h5 class="card-title">Detalles</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label " style="color: rgba(1, 41, 112, 0.6); margin-bottom: 20px;">Codigo</div>
+                                    <div class="col-lg-9 col-md-8" th:text="${cod}">codigo</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label " style="color: rgba(1, 41, 112, 0.6); margin-bottom: 20px;">Categoria</div>
+                                    <div class="col-lg-9 col-md-8" th:text="${cat}">categoria</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" style="color: rgba(1, 41, 112, 0.6); margin-bottom: 5px;">Ingredientes</div>
+                                    <p class="small fst-italic" th:text="${ingredients}">Sunt est soluta temporibus accusantium neque nam maiores
+                                        cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
+                                        rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at
+                                        unde.</p>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" style="color: rgba(1, 41, 112, 0.6); margin-bottom: 5px;">Alergenos</div>
+                                    <p class="small fst-italic" th:text="${al}">Sunt est soluta temporibus accusantium neque nam maiores
+                                        cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
+                                        rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at
+                                        unde.</p>
+                                </div>
+
+                            </div>
+
+                            <!-- Formulario edicion producto -->
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <th:block th:insert="/formulario-producto::formulario-producto"/>
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<th:block th:insert="/footer::footer"/>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:insert="scripts::scripts"/>
+
+</body>
+
+</html>

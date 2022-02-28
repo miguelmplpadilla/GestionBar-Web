@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Top Selling -->
+    <div class="col-12" th:fragment="tablaCategorias">
+        <div class="card top-selling">
+
+            <div class="card-body pb-0">
+                <h5 class="card-title" th:text="${tipo}">Tabla</h5>
+
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th scope="col" th:text="${tipo}">Tabla</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="datos: ${datos}">
+                        <!--th:href="@{'/detalleProductos?id='+${datos.id}}"-->
+                        <td><a th:href="@{'/detalleCategoria?id='+${datos.id}}" class="text-primary fw-bold" th:text="${datos.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div><!-- End Top Selling -->
+</body>
+</html>

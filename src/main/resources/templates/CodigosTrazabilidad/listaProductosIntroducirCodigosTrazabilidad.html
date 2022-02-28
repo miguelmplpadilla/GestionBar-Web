@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="/head::head"/>
+
+<body>
+
+<th:block th:insert="/header::header"/>
+
+<th:block th:insert="/sideBar::sideBar"/>
+
+<main id="main" class="main">
+
+    <th:block th:insert="pageTitle::pageTitle"/>
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="card top-selling">
+
+                    <div class="card-body pb-0">
+                        <h5 class="card-title" th:text="${tipo}">Tabla</h5>
+
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th scope="col">Imagen</th>
+                                <th scope="col" th:text="${tipo}">Tabla</th>
+                                <th scope="col">Categoria</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="datos: ${datos}">
+                                <th scope="row"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos.img}" referrerpolicy="no-referrer" alt=""></a></th>
+                                <td><a th:href="@{'/introducirCodigoTrazabilidad?idProducto='+${datos.id}}" class="text-primary fw-bold" th:text="${datos.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                                <td class="fw-bold" th:text="${datos.fkCategoria}">124</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div><!-- End Top Selling -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<th:block th:insert="/footer::footer"/>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:insert="scripts::scripts"/>
+</body>
+
+</html>

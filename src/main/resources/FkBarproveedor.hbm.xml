@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.entity.FkBarproveedor" table="fk_barproveedor" schema="gestionbar">
+        <id name="id" column="id"/>
+        <property name="fkBar" column="fk_bar"/>
+        <property name="fkProveedor" column="fk_proveedor"/>
+        <many-to-one name="barByFkBar" class="com.entity.Bar">
+            <column name="fk_bar"/>
+        </many-to-one>
+        <many-to-one name="proveedoresByFkProveedor" class="com.entity.Proveedores">
+            <column name="fk_proveedor"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

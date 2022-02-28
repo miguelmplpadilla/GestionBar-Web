@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Top Selling -->
+    <div class="col-12" th:fragment="tablaProductos">
+        <div class="card top-selling">
+
+            <div class="card-body pb-0">
+                <h5 class="card-title" th:text="${tipo}">Tabla</h5>
+
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col" th:text="${tipo}">Tabla</th>
+                        <th scope="col">Categoria</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="datos: ${datos}">
+                        <th scope="row"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos.img}" referrerpolicy="no-referrer" alt=""></a></th>
+                        <td><a th:href="@{'/detalleProductos?id='+${datos.id}}" class="text-primary fw-bold" th:text="${datos.nombre}">Ut inventore ipsa voluptas nulla</a></td>
+                        <td class="fw-bold" th:text="${datos.fkCategoria}">124</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div><!-- End Top Selling -->
+</body>
+</html>
