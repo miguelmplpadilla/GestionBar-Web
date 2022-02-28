@@ -24,7 +24,7 @@ public class RegisterController {
     @Autowired
     BarDao barDao;
 
-    @GetMapping("register")
+    @GetMapping("/register")
     public String showRegistrationForm(Model model,
                                        @RequestParam(value = "user", required = false) String user,
                                        @RequestParam(value = "pas", required = false) String pas) {
@@ -66,7 +66,7 @@ public class RegisterController {
         return "register";
     }
 
-    @GetMapping("cerrarSesion")
+    @GetMapping("/cerrarSesion")
     public String logout() {
         SecurityContextHolder.getContext().setAuthentication(null);
 
