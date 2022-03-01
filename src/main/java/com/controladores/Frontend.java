@@ -802,6 +802,8 @@ public class Frontend {
                 ct.setFkBar(bar.getId());
 
                 codigosTrazabilidadDao.create(ct);
+
+                return "redirect:listaCodigosProducto";
             }
         }
 

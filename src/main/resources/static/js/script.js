@@ -111,6 +111,10 @@ $(function (newChild) {
 
 				texto.value = result.codeResult.code;
 
+				var boton = document.getElementById("boton");
+				boton.click();
+
+				var intro = document.getElementById("intro");
 				var intro = document.getElementById("intro");
 
 				intro.style.display = "inline";
@@ -118,9 +122,6 @@ $(function (newChild) {
 				let div = document.createElement("div");
 
 				intro.innerHTML = "<a href='/introducir-producto?code="+result.codeResult.code+"' style='color:white;'>Introducir producto</a>";
-
-				var boton = document.getElementById("boton");
-				boton.click();
 
 				Quagga.stop();
 			}

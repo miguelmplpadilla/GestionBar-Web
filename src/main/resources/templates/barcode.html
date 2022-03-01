@@ -9,7 +9,7 @@
 <body>
 	<div th:fragment="barcode">
 		<!-- partial:index.partial.html -->
-		<input id="scanner_input" class="form-control" type="text" />
+		<input id="scanner_input" class="form-control" type="text" th:name="codigoTrazabilidad" />
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#barcodeScanner">
 			Escanear producto
 		</button>
@@ -35,7 +35,7 @@
 						<div class="error"></div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-secondary" id="boton" data-dismiss="modal" value="Cerrar"></input>
+						<input type="button" class="btn btn-secondary" id="boton" data-dismiss="modal" value="Cerrar">
 					</div>
 				</div>
 			</div>
