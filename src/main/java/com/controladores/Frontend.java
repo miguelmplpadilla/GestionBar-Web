@@ -879,7 +879,7 @@ public class Frontend {
 
         if (correo != null) {
             if (!correo.equals(datosbar.getCorreoElectronico())) {
-                datosbar.setFotoPerfil(correo);
+                datosbar.setCorreoElectronico(correo);
                 datosbarDao.update(datosbar);
             }
         }

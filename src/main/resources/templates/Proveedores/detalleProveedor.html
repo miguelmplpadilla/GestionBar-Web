@@ -3,6 +3,44 @@
 
 <th:block th:insert="head::head"/>
 
+<style>
+    @media
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+        table, thead, tbody, th, tr {
+            display: block;
+        }
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr { border: 1px solid #ccc; }
+
+        td {
+            display:inline-block;
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+    }
+</style>
+
 <body>
 
 <th:block th:insert="header::header"/>
@@ -139,9 +177,8 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="datos2: ${datos2}">
-                                            <th scope="row"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos2.img}" referrerpolicy="no-referrer" alt=""></a></th>
-                                            <td><a th:href="@{'/detalleProductos?id='+${datos2.id}}" class="text-primary fw-bold" th:text="${datos2.nombre}">Ut inventore ipsa voluptas nulla</a></td>
-                                            <td class="fw-bold" th:text="${datos2.fkCategoria}">124</td>
+                                            <th scope="row" style="display: inline;"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos2.img}" referrerpolicy="no-referrer" alt=""></a></th>
+                                            <td style="display: inline;"><a th:href="@{'/detalleProductos?id='+${datos2.id}}" class="text-primary fw-bold" th:text="${datos2.nombre}">Ut inventore ipsa voluptas nulla</a></td>
                                             <td class="fw-bold"><input type="number" step="any" th:id="'introducirPrecio'+${datos2.id}" class="form-control" th:name="precio"></td>
                                             <td class="fw-bold"><input type="button" th:onclick="'anadirProducto('+${datos2.id}+','+${idProveedor}+',1)'" class="btn btn-primary" value="Añadir"></td>
                                         </tr>

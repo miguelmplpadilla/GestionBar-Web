@@ -2,7 +2,7 @@ function anadirProducto(idProducto, idProveedor, accion) {
     if (accion === 1) {
         var precio1 = document.getElementById("introducirPrecio"+idProducto);
         if (precio1.value.replace(" ","") === "") {
-            alert("Introduce algun precio en el prodeucto")
+            alert("Introduce algun precio en el producto")
         } else {
             window.location.replace("/anadirProductoProveedor?idProveedor="+idProveedor+"&idProducto="+idProducto+"&precio="+precio1.value+"&accion="+accion);
         }
