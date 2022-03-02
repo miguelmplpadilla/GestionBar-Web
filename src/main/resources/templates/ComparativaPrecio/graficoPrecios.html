@@ -121,26 +121,26 @@
 
                                                 <div class="accordion" id="accordionExample" th:each="comparativa: ${datos2.productos}">
                                                     <div class="accordion-item">
-                                                        <h2 class="accordion-header" th:id="'heading2'+${comparativa.id}">
+                                                        <h2 class="accordion-header" th:id="'heading2'+${comparativa.id}+''+${datos2.proveedor.id}">
                                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                                    th:data-bs-target="'#collapse2'+${comparativa.id}" aria-expanded="true"
-                                                                    th:aria-controls="'collapse2'+${comparativa.id}"
-                                                                    th:onclick="'grafico('+${comparativa.id}+', 2)'">
+                                                                    th:data-bs-target="'#collapse2'+${comparativa.id}+''+${datos2.proveedor.id}" aria-expanded="true"
+                                                                    th:aria-controls="'collapse2'+${comparativa.id}+''+${datos2.proveedor.id}"
+                                                                    th:onclick="'grafico('+${comparativa.id}+''+${datos2.proveedor.id}+', 2)'">
                                                                 <p th:text="${comparativa.nombreProducto}"></p>
                                                             </button>
                                                         </h2>
-                                                        <div th:id="'collapse2'+${comparativa.id}" class="accordion-collapse collapse"
-                                                             th:aria-labelledby="'heading2'+${comparativa.id}" data-bs-parent="#accordionExample">
+                                                        <div th:id="'collapse2'+${comparativa.id}+''+${datos2.proveedor.id}" class="accordion-collapse collapse"
+                                                             th:aria-labelledby="'heading2'+${comparativa.id}+''+${datos2.proveedor.id}" data-bs-parent="#accordionExample">
                                                             <div class="accordion-body">
                                                                 <div class="row">
 
-                                                                    <p style="display: none;" th:id="'precios2'+${comparativa.id}" th:text="${comparativa.productos.precios}"></p>
-                                                                    <p style="display: none;" th:id="'fechas2'+${comparativa.id}" th:text="${comparativa.productos.fechas}"></p>
+                                                                    <p style="display: none;" th:id="'precios2'+${comparativa.id}+''+${datos2.proveedor.id}" th:text="${comparativa.productos.precios}"></p>
+                                                                    <p style="display: none;" th:id="'fechas2'+${comparativa.id}+''+${datos2.proveedor.id}" th:text="${comparativa.productos.fechas}"></p>
 
                                                                     <div class="container">
                                                                         <h2 style="margin-left: 10px;">Comparativa de precio por proveedor</h2>
                                                                         <div>
-                                                                            <canvas th:id="'myChart2'+${comparativa.id}"></canvas>
+                                                                            <canvas th:id="'myChart2'+${comparativa.id}+''+${datos2.proveedor.id}"></canvas>
                                                                         </div>
                                                                     </div>
 
