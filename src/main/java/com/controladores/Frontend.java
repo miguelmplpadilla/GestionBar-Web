@@ -98,7 +98,7 @@ public class Frontend {
             for (int i = 0; i < productosList.size(); i++) {
                 num++;
                 String nombreProducto = productosList.get(i).getNombre();
-                List<Comparativaprecio> comparativarecios = comparativaPrecioDao.getByProductId(productosList.get(i).getId());
+                List<Comparativaprecio> comparativarecios = comparativaPrecioDao.getByProductId(productosList.get(i).getId(), bar.getId());
 
                 if (comparativarecios.size() != 0) {
                     String fechas = " ,";
@@ -106,10 +106,10 @@ public class Frontend {
 
                     for (int j = 0; j < comparativarecios.size(); j++) {
                         if (j != comparativarecios.size() - 1) {
-                            fechas = fechas + comparativarecios.get(j).getFecha().toString() + ",";
+                            fechas = fechas + comparativarecios.get(j).getFecha().toString()+" - "+proveedoresDao.getById(comparativarecios.get(j).getFkProveedor()).get(0).getNombre()+ ",";
                             precios = precios + comparativarecios.get(j).getPrecio() + ",";
                         } else {
-                            fechas = fechas + comparativarecios.get(j).getFecha().toString();
+                            fechas = fechas + comparativarecios.get(j).getFecha().toString()+" - "+proveedoresDao.getById(comparativarecios.get(j).getFkProveedor()).get(0).getNombre();
                             precios = precios + comparativarecios.get(j).getPrecio() + "," + comparativarecios.get(j).getPrecio() + 1;
                         }
                     }
@@ -131,7 +131,7 @@ public class Frontend {
                     for (int i = 0; i < productosList.size(); i++) {
                         num++;
                         String nombreProducto = productosList.get(i).getNombre();
-                        List<Comparativaprecio> comparativarecios = comparativaPrecioDao.getByProveedorIdAndProductoId(proveedores.get(n).getId(), productosList.get(i).getId());
+                        List<Comparativaprecio> comparativarecios = comparativaPrecioDao.getByProveedorIdAndProductoId(proveedores.get(n).getId(), productosList.get(i).getId(), bar.getId());
 
                         if (comparativarecios.size() != 0) {
                             f = true;
@@ -558,19 +558,21 @@ public class Frontend {
             }
         }
 
-        List<Productos> productosProveedor = proveedoresDao.getProductoByProveedor(id);
+        List<Productos> productosProveedor = proveedoresDao.getProductoByProveedor(id, bar.getId());
 
         ArrayList<ProductoProveedor> fkProductoProveedor = new ArrayList<>();
 
-        List<FkProductosproveedores> ppl = productoProveedorDao.getAllByProveedor(id);
+        List<FkProductosproveedores> ppl = productoProveedorDao.getAllByProveedor(id, bar.getId());
 
-        for (int i = 0; i < productosProveedor.size(); i++) {
-            ProductoProveedor pp = new ProductoProveedor(productosProveedor.get(i).getId(),
-                    productosProveedor.get(i).getNombre(), productosProveedor.get(i).getImg(),
-                    ppl.get(i).getPrecio(),
-                    categoriasDao.getById(productosProveedor.get(i).getFkCategoria()).get(0).getNombre());
+        if (ppl.size() != 0) {
+            for (int i = 0; i < productosProveedor.size(); i++) {
+                ProductoProveedor pp = new ProductoProveedor(productosProveedor.get(i).getId(),
+                        productosProveedor.get(i).getNombre(), productosProveedor.get(i).getImg(),
+                        ppl.get(i).getPrecio(),
+                        categoriasDao.getById(productosProveedor.get(i).getFkCategoria()).get(0).getNombre());
 
-            fkProductoProveedor.add(pp);
+                fkProductoProveedor.add(pp);
+            }
         }
 
         List<Productos> productos = productoDao.getAll();
@@ -610,12 +612,16 @@ public class Frontend {
                                           @RequestParam(value = "precio", defaultValue = "-1", required = false) double precio,
                                           @RequestParam(value = "accion", defaultValue = "-1", required = false) int accion) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Bar bar = barDao.getByUserName(currentUserName(authentication)).get(0);
+
         if (accion == 1) {
             FkProductosproveedores fkProductosproveedores = new FkProductosproveedores();
 
             fkProductosproveedores.setFkProveedor(idProveedor);
             fkProductosproveedores.setFkProducto(idProducto);
             fkProductosproveedores.setPrecio(precio);
+            fkProductosproveedores.setFkBar(bar.getId());
 
             productoProveedorDao.create(fkProductosproveedores);
 
@@ -624,22 +630,24 @@ public class Frontend {
             comparativaprecio.setFkProveedor(idProveedor);
             comparativaprecio.setFkProducto(idProducto);
             comparativaprecio.setPrecio(precio);
+            comparativaprecio.setFkBar(bar.getId());
             comparativaprecio.setFecha(new Date(System.currentTimeMillis()));
 
             comparativaPrecioDao.create(comparativaprecio);
         } else if (accion == 2) {
             FkProductosproveedores fkProductosproveedores = new FkProductosproveedores();
 
-            fkProductosproveedores.setId(productoProveedorDao.getByProductId(idProducto).get(0).getId());
+            fkProductosproveedores.setId(productoProveedorDao.getByProductId(idProducto, bar.getId()).get(0).getId());
             fkProductosproveedores.setFkProveedor(idProveedor);
             fkProductosproveedores.setFkProducto(idProducto);
             fkProductosproveedores.setPrecio(precio);
+            fkProductosproveedores.setFkBar(bar.getId());
 
             productoProveedorDao.delete(fkProductosproveedores);
         } else if (accion == 3) {
             FkProductosproveedores fkProductosproveedores = new FkProductosproveedores();
 
-            fkProductosproveedores.setId(productoProveedorDao.getByProductId(idProducto).get(0).getId());
+            fkProductosproveedores.setId(productoProveedorDao.getByProductId(idProducto, bar.getId()).get(0).getId());
             fkProductosproveedores.setFkProveedor(idProveedor);
             fkProductosproveedores.setFkProducto(idProducto);
             fkProductosproveedores.setPrecio(precio);
@@ -651,6 +659,7 @@ public class Frontend {
             comparativaprecio.setFkProveedor(idProveedor);
             comparativaprecio.setFkProducto(idProducto);
             comparativaprecio.setPrecio(precio);
+            comparativaprecio.setFkBar(bar.getId());
             comparativaprecio.setFecha(new Date(System.currentTimeMillis()));
 
             comparativaPrecioDao.create(comparativaprecio);

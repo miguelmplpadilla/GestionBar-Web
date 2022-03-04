@@ -29,12 +29,12 @@ public class ComparativaPrecioDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Comparativaprecio> getByProductId(int id) {
-        return entityManager.createQuery("select c from Comparativaprecio c where c.fkProducto = "+id).getResultList();
+    public List<Comparativaprecio> getByProductId(int id, int idBar) {
+        return entityManager.createQuery("select c from Comparativaprecio c where c.fkProducto = "+id+" and c.fkBar = "+idBar).getResultList();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Comparativaprecio> getByProveedorIdAndProductoId(int proveedorId, int productoId) {
-        return entityManager.createQuery("select c from Comparativaprecio c where c.fkProducto = "+productoId+" and c.fkProveedor = "+proveedorId).getResultList();
+    public List<Comparativaprecio> getByProveedorIdAndProductoId(int proveedorId, int productoId, int idBar) {
+        return entityManager.createQuery("select c from Comparativaprecio c where c.fkProducto = "+productoId+" and c.fkProveedor = "+proveedorId+" and c.fkBar = "+idBar).getResultList();
     }
 }

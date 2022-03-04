@@ -29,7 +29,7 @@
 <script>
     function introducirCodigo() {
         var inputCodigo = document.getElementById("scanner_input");
-        if (precio1.value.replace(" ","") !== "") {
+        if (inputCodigo.value.replace(" ","") !== "") {
             window.location.replace(window.location+"&codigoTrazabilidad="+inputCodigo.value);
         } else {
             alert("Introduce el codigo en el campo correspondiente");

@@ -36,13 +36,13 @@ public class ProductoProveedorDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<FkProductosproveedores> getByProductId(int id) {
-        return entityManager.createQuery("select pp from FkProductosproveedores pp where pp.fkProducto = "+id).getResultList();
+    public List<FkProductosproveedores> getByProductId(int id, int idBar) {
+        return entityManager.createQuery("select pp from FkProductosproveedores pp where pp.fkProducto = "+id+" and pp.fkBar = "+idBar).getResultList();
     }
 
     @SuppressWarnings("unchecked")
-    public List<FkProductosproveedores> getAllByProveedor(int id) {
-        return entityManager.createQuery("select pp from FkProductosproveedores pp where pp.fkProveedor = "+id).getResultList();
+    public List<FkProductosproveedores> getAllByProveedor(int id, int idBar) {
+        return entityManager.createQuery("select pp from FkProductosproveedores pp where pp.fkProveedor = "+id+" and pp.fkBar = "+idBar).getResultList();
     }
 
 }

@@ -50,8 +50,8 @@ public class ProveedoresDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Productos> getProductoByProveedor(int proveedor) {
-        return entityManager.createQuery("select p from Productos p, FkProductosproveedores pp, Proveedores pro where p.id = pp.fkProducto and pp.fkProveedor = pro.id and pro.id = '"+proveedor+"'").getResultList();
+    public List<Productos> getProductoByProveedor(int proveedor, int idBar) {
+        return entityManager.createQuery("select p from Productos p, FkProductosproveedores pp, Proveedores pro where p.id = pp.fkProducto and pp.fkProveedor = pro.id and pro.id = '"+proveedor+"' and pp.fkBar = "+idBar).getResultList();
     }
 
 
