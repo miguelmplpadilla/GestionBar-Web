@@ -279,7 +279,24 @@ public class Frontend {
                     producto.setTrazas(trazas);
                 }
 
-                productoDao.create(producto);
+                List<Productos> allProductos = productoDao.getAll();
+
+                boolean f = true;
+
+                for (int i = 0; i < allProductos.size(); i++) {
+                    if (allProductos.get(i).getNombre() == producto.getNombre()
+                            && allProductos.get(i).getImg() == producto.getImg()
+                            && allProductos.get(i).getCodigoTrazabilidad() == producto.getCodigoTrazabilidad()
+                            && allProductos.get(i).getIngredientes() == producto.getIngredientes()
+                            && allProductos.get(i).getAlergenos() == producto.getAlergenos()) {
+                        f = false;
+                        break;
+                    }
+                }
+
+                if (f) {
+                    productoDao.create(producto);
+                }
 
                 model.addAttribute("name", "");
                 model.addAttribute("cod", "");
@@ -448,7 +465,22 @@ public class Frontend {
                 proveedor.setNombre(nombre);
                 proveedor.setNumeroTelefono(numero);
 
-                proveedoresDao.create(proveedor);
+                List<Proveedores> allProveedores = proveedoresDao.getAll();
+
+                boolean f = true;
+
+                for (int i = 0; i < allProveedores.size(); i++) {
+                    if (allProveedores.get(i).getNombre() == proveedor.getNombre()
+                            && allProveedores.get(i).getNumeroTelefono() == proveedor.getNumeroTelefono()) {
+                        f = false;
+                        break;
+                    }
+                }
+
+                if (f) {
+                    proveedoresDao.create(proveedor);
+                }
+
             } else {
                 model.addAttribute("isGood", false);
             }
@@ -500,7 +532,21 @@ public class Frontend {
 
                 categoria.setNombre(nombre);
 
-                categoriasDao.create(categoria);
+                List<Categorias> allCategorias = categoriasDao.getAll();
+
+                boolean f = true;
+
+                for (int i = 0; i < allCategorias.size(); i++) {
+                    if (allCategorias.get(i).getNombre() == categoria.getNombre()) {
+                        f = false;
+                        break;
+                    }
+                }
+
+                if (f) {
+                    categoriasDao.create(categoria);
+                }
+
             } else {
                 model.addAttribute("isGood", false);
             }

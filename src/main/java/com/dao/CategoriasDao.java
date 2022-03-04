@@ -39,7 +39,7 @@ public class CategoriasDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Productos> getAll() {
+    public List<Categorias> getAll() {
         return entityManager.createQuery("select c from Categorias c").getResultList();
     }
 
