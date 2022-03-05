@@ -38,6 +38,23 @@
             padding-right: 10px;
             white-space: nowrap;
         }
+
+        #iva:before {
+            content:"Iva";
+        }
+
+        #descuentoIva:before {
+            content:"Sin Iva";
+        }
+
+        #precio:before {
+            content:"Precio";
+        }
+
+        #eliminarIva {
+            display:block;
+        }
+
     }
 </style>
 
@@ -141,9 +158,9 @@
                                         <tr>
                                             <th scope="col">Imagen</th>
                                             <th scope="col" th:text="${tipo}">Tabla</th>
-                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Sin Iva</th>
                                             <th scope="col">Precio</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Editar precio</th>
                                             <th scope="col">Eliminar de proveedor</th>
                                         </tr>
                                         </thead>
@@ -151,9 +168,12 @@
                                         <tr th:each="datos1: ${datos1}">
                                             <th scope="row"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos1.img}" referrerpolicy="no-referrer" alt=""></a></th>
                                             <td><a th:href="@{'/detalleProductos?id='+${datos1.id}}" class="text-primary fw-bold" th:text="${datos1.nombre}">Ut inventore ipsa voluptas nulla</a></td>
-                                            <td class="fw-bold" th:text="${datos1.fkCategoria}">124</td>
-                                            <td class="fw-bold"><input type="number" step="any" th:id="'eliminarPrecio'+${datos1.id}" th:value="${datos1.precio}" class="form-control" /></td>
-                                            <td class="fw-bold">€</td>
+                                            <td class="fw-bold" th:switch="${datos1.iva}" id="eliminarIva">
+                                                <p id="descuentoIva"></p>
+                                                <p th:case="0" th:text="${datos1.precio}+'€'"></p>
+                                                <p th:case="*" th:text="${datos1.precio}-(${datos1.precio}*${datos1.iva}/100)+'€'"></p>
+                                            </td>
+                                            <td class="fw-bold"><p id="precio"></p><input type="number" step="any" th:id="'eliminarPrecio'+${datos1.id}" th:value="${datos1.precio}" class="form-control" /></td>
                                             <td class="fw-bold"><input th:onclick="'anadirProducto('+${datos1.id}+','+${idProveedor}+',3)'" type="button" style="background:#00c900; border-color: #00c900;" class="btn btn-primary" value="Editar precio"></td>
                                             <td class="fw-bold"><input th:onclick="'anadirProducto('+${datos1.id}+','+${idProveedor}+',2)'" type="button" class="btn btn-primary" value="Eliminar"></td>
                                         </tr>
@@ -169,6 +189,7 @@
                                         <thead>
                                         <tr>
                                             <th scope="col">Imagen</th>
+                                            <th scope="col">Iva</th>
                                             <th scope="col">Precio</th>
                                             <th scope="col">Añadir proveedor</th>
                                         </tr>
@@ -177,7 +198,8 @@
                                         <tr th:each="datos2: ${datos2}">
                                             <th scope="row" style="display: inline;"><a href="#"><img style="width: 60px; height: 50px;" th:src="${datos2.img}" referrerpolicy="no-referrer" alt=""></a></th>
                                             <td style="display: inline-block;"><a th:href="@{'/detalleProductos?id='+${datos2.id}}" class="text-primary fw-bold" th:text="${datos2.nombre}">Ut inventore ipsa voluptas nulla</a></td>
-                                            <td class="fw-bold"><input type="number" step="any" th:id="'introducirPrecio'+${datos2.id}" class="form-control" th:name="precio"></td>
+                                            <td class="fw-bold"><p id="iva"></p><input type="number" step="any" th:id="'introducirIva'+${datos2.id}" class="form-control" th:name="iva"></td>
+                                            <td class="fw-bold"><p id="precio"></p><input type="number" step="any" th:id="'introducirPrecio'+${datos2.id}" class="form-control" th:name="precio"></td>
                                             <td class="fw-bold"><input type="button" th:onclick="'anadirProducto('+${datos2.id}+','+${idProveedor}+',1)'" class="btn btn-primary" value="Añadir"></td>
                                         </tr>
                                         </tbody>

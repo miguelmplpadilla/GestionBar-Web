@@ -615,7 +615,8 @@ public class Frontend {
                 ProductoProveedor pp = new ProductoProveedor(productosProveedor.get(i).getId(),
                         productosProveedor.get(i).getNombre(), productosProveedor.get(i).getImg(),
                         ppl.get(i).getPrecio(),
-                        categoriasDao.getById(productosProveedor.get(i).getFkCategoria()).get(0).getNombre());
+                        categoriasDao.getById(productosProveedor.get(i).getFkCategoria()).get(0).getNombre(),
+                        ppl.get(i).getIva());
 
                 fkProductoProveedor.add(pp);
             }
@@ -656,7 +657,8 @@ public class Frontend {
     public String anadirProductoProveedor(@RequestParam(value = "idProveedor", defaultValue = "-1", required = false) int idProveedor,
                                           @RequestParam(value = "idProducto", defaultValue = "-1", required = false) int idProducto,
                                           @RequestParam(value = "precio", defaultValue = "-1", required = false) double precio,
-                                          @RequestParam(value = "accion", defaultValue = "-1", required = false) int accion) {
+                                          @RequestParam(value = "accion", defaultValue = "-1", required = false) int accion,
+                                          @RequestParam(value = "iva", defaultValue = "0", required = false) double iva) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Bar bar = barDao.getByUserName(currentUserName(authentication)).get(0);
@@ -668,6 +670,7 @@ public class Frontend {
             fkProductosproveedores.setFkProducto(idProducto);
             fkProductosproveedores.setPrecio(precio);
             fkProductosproveedores.setFkBar(bar.getId());
+            fkProductosproveedores.setIva(iva);
 
             productoProveedorDao.create(fkProductosproveedores);
 

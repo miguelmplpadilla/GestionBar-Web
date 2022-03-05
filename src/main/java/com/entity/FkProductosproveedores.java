@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class FkProductosproveedores {
     private int id;
     private double precio;
+    private double iva;
     private int fkBar;
     private int fkProducto;
     private int fkProveedor;
@@ -29,6 +30,16 @@ public class FkProductosproveedores {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    @Basic
+    @Column(name = "iva")
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
     }
 
     @Basic
@@ -70,6 +81,7 @@ public class FkProductosproveedores {
 
         if (id != that.id) return false;
         if (Double.compare(that.precio, precio) != 0) return false;
+        if (Double.compare(that.iva, iva) != 0) return false;
         if (fkBar != that.fkBar) return false;
         if (fkProducto != that.fkProducto) return false;
         if (fkProveedor != that.fkProveedor) return false;
@@ -83,6 +95,8 @@ public class FkProductosproveedores {
         long temp;
         result = id;
         temp = Double.doubleToLongBits(precio);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(iva);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + fkBar;
         result = 31 * result + fkProducto;
