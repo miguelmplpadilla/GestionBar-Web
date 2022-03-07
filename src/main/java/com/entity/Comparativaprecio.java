@@ -11,6 +11,7 @@ public class Comparativaprecio {
     private int id;
     private double precio;
     private Date fecha;
+    private double iva;
     private int fkBar;
     private int fkProducto;
     private int fkProveedor;
@@ -43,6 +44,16 @@ public class Comparativaprecio {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    @Basic
+    @Column(name = "iva")
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
     }
 
     @Basic
@@ -84,6 +95,7 @@ public class Comparativaprecio {
 
         if (id != that.id) return false;
         if (Double.compare(that.precio, precio) != 0) return false;
+        if (Double.compare(that.iva, iva) != 0) return false;
         if (fkBar != that.fkBar) return false;
         if (fkProducto != that.fkProducto) return false;
         if (fkProveedor != that.fkProveedor) return false;
@@ -100,6 +112,8 @@ public class Comparativaprecio {
         temp = Double.doubleToLongBits(precio);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
+        temp = Double.doubleToLongBits(iva);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + fkBar;
         result = 31 * result + fkProducto;
         result = 31 * result + fkProveedor;

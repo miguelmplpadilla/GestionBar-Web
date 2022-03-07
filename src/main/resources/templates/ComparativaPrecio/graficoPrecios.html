@@ -78,6 +78,7 @@
 
                                                 <p style="display: none;" th:id="'precios'+${datos.id}" th:text="${datos.productos.precios}"></p>
                                                 <p style="display: none;" th:id="'fechas'+${datos.id}" th:text="${datos.productos.fechas}"></p>
+                                                <p style="display: none;" th:id="'ivas'+${datos.id}" th:text="${datos.productos.ivas}"></p>
 
                                                 <div class="container">
                                                     <h2 style="margin-left: 10px;">Comparativa de precio</h2>
@@ -136,6 +137,7 @@
 
                                                                     <p style="display: none;" th:id="'precios2'+${comparativa.id}+''+${datos2.proveedor.id}" th:text="${comparativa.productos.precios}"></p>
                                                                     <p style="display: none;" th:id="'fechas2'+${comparativa.id}+''+${datos2.proveedor.id}" th:text="${comparativa.productos.fechas}"></p>
+                                                                    <p style="display: none;" th:id="'ivas2'+${comparativa.id}+''+${datos2.proveedor.id}" th:text="${comparativa.productos.ivas}"></p>
 
                                                                     <div class="container">
                                                                         <h2 style="margin-left: 10px;">Comparativa de precio por proveedor</h2>
@@ -185,10 +187,12 @@
         if (tipo === 1) {
             var fechas = document.getElementById("fechas"+id).innerHTML;
             var precios = document.getElementById("precios"+id).innerHTML;
+            var ivas = document.getElementById("ivas"+id).innerHTML;
             console.log(fechas);
             console.log(precios);
             var fechasArr = fechas.split(",");
             var preciosArr = precios.split(",");
+            var ivasArr = ivas.split(",");
             var ctx = document.getElementById("myChart"+id).getContext("2d");
             var myChart = new Chart(ctx, {
                 type: "line",
@@ -196,9 +200,14 @@
                     labels: fechasArr,
                     datasets: [
                         {
-                            label: "Linea precio",
+                            label: "Con iva",
                             data: preciosArr,
                             backgroundColor: "rgba(153,205,1,0.6)",
+                        },
+                        {
+                            label: "Sin iva",
+                            data: ivasArr,
+                            backgroundColor: "rgba(229,31,55,0.6)",
                         },
                     ],
                 },
@@ -206,10 +215,12 @@
         } else if (tipo === 2) {
             var fechas = document.getElementById("fechas2"+id).innerHTML;
             var precios = document.getElementById("precios2"+id).innerHTML;
+            var ivas = document.getElementById("ivas2"+id).innerHTML;
             console.log(fechas);
             console.log(precios);
             var fechasArr = fechas.split(",");
             var preciosArr = precios.split(",");
+            var ivasArr = ivas.split(",");
             var ctx = document.getElementById("myChart2"+id).getContext("2d");
             var myChart = new Chart(ctx, {
                 type: "line",
@@ -217,9 +228,14 @@
                     labels: fechasArr,
                     datasets: [
                         {
-                            label: "Linea precio",
+                            label: "Con iva",
                             data: preciosArr,
                             backgroundColor: "rgba(153,205,1,0.6)",
+                        },
+                        {
+                            label: "Sin iva",
+                            data: ivasArr,
+                            backgroundColor: "rgba(229,31,55,0.6)",
                         },
                     ],
                 },

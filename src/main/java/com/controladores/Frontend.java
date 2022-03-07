@@ -103,18 +103,22 @@ public class Frontend {
                 if (comparativarecios.size() != 0) {
                     String fechas = " ,";
                     String precios = " ,";
+                    String ivas = " ,";
 
                     for (int j = 0; j < comparativarecios.size(); j++) {
+                        double ivaPrecio = (comparativarecios.get(j).getPrecio() - ((comparativarecios.get(j).getPrecio()*comparativarecios.get(j).getIva())/100));
                         if (j != comparativarecios.size() - 1) {
                             fechas = fechas + comparativarecios.get(j).getFecha().toString()+" - "+proveedoresDao.getById(comparativarecios.get(j).getFkProveedor()).get(0).getNombre()+ ",";
                             precios = precios + comparativarecios.get(j).getPrecio() + ",";
+                            ivas = ivas + ivaPrecio + ",";
                         } else {
                             fechas = fechas + comparativarecios.get(j).getFecha().toString()+" - "+proveedoresDao.getById(comparativarecios.get(j).getFkProveedor()).get(0).getNombre();
                             precios = precios + comparativarecios.get(j).getPrecio() + "," + comparativarecios.get(j).getPrecio() + 1;
+                            ivas = ivas + ivaPrecio + "," + ivaPrecio + 1;
                         }
                     }
 
-                    comparativas.add(new Comparativa(num, nombreProducto, new PorductoComparativa(fechas, precios)));
+                    comparativas.add(new Comparativa(num, nombreProducto, new PorductoComparativa(fechas, precios, ivas)));
                 }
             }
 
@@ -137,18 +141,22 @@ public class Frontend {
                             f = true;
                             String fechas = " ,";
                             String precios = " ,";
+                            String ivas = " ,";
 
                             for (int j = 0; j < comparativarecios.size(); j++) {
+                                double ivaPrecio = (comparativarecios.get(j).getPrecio() - ((comparativarecios.get(j).getPrecio()*comparativarecios.get(j).getIva())/100));
                                 if (j != comparativarecios.size() - 1) {
                                     fechas = fechas + comparativarecios.get(j).getFecha().toString() + ",";
                                     precios = precios + comparativarecios.get(j).getPrecio() + ",";
+                                    ivas = ivas + ivaPrecio + ",";
                                 } else {
                                     fechas = fechas + comparativarecios.get(j).getFecha().toString();
                                     precios = precios + comparativarecios.get(j).getPrecio() + "," + comparativarecios.get(j).getPrecio() + 1;
+                                    ivas = ivas + ivaPrecio + "," + ivaPrecio + 1;
                                 }
                             }
 
-                            comparativasPorProveedor.add(new Comparativa(num, nombreProducto, new PorductoComparativa(fechas, precios)));
+                            comparativasPorProveedor.add(new Comparativa(num, nombreProducto, new PorductoComparativa(fechas, precios, ivas)));
                         }
                     }
 
@@ -681,6 +689,7 @@ public class Frontend {
             comparativaprecio.setPrecio(precio);
             comparativaprecio.setFkBar(bar.getId());
             comparativaprecio.setFecha(new Date(System.currentTimeMillis()));
+            comparativaprecio.setIva(iva);
 
             comparativaPrecioDao.create(comparativaprecio);
         } else if (accion == 2) {
@@ -710,6 +719,7 @@ public class Frontend {
             comparativaprecio.setPrecio(precio);
             comparativaprecio.setFkBar(bar.getId());
             comparativaprecio.setFecha(new Date(System.currentTimeMillis()));
+            comparativaprecio.setIva(iva);
 
             comparativaPrecioDao.create(comparativaprecio);
         }
